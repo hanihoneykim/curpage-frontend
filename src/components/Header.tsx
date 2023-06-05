@@ -23,7 +23,7 @@ export default function Header(){
     const logoColor  = useColorModeValue("blue.500", "blue.200");
     return (
         <HStack justifyContent={"space-between"} p={10} borderBottomWidth={1}>
-            <HStack justifyContent={"flex-start"} spacing={10}>
+            <HStack justifyContent={"flex-start"} spacing={12}>
                 <SideBar isOpen={isSideOpen} onClose={onSideClose} onOpen={onSideOpen} />
                 <Box color={logoColor}>
                     <Link to={"/"}>
