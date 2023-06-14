@@ -30,7 +30,7 @@ export default function SideBar({ isOpen, onClose, onOpen}: SideBarProps) {
                 <DrawerBody>
 
                     <Grid templateColumns={"repeat(1, 1fr)"} my={3}>
-                        <Link to={"/users/me"}>
+                        <Link to={"api/v1/users/me"}>
                             <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
                                     <Text fontSize={26} ml={5} mr={8}><FaHome /></Text>
                                     <Text fontWeight={"bold"} fontSize={18}>마이 페이지</Text>
@@ -43,17 +43,12 @@ export default function SideBar({ isOpen, onClose, onOpen}: SideBarProps) {
                         <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
                             <Text fontSize={26} ml={5} mr={8}><FaBox /></Text>
                             <Text fontWeight={"bold"} fontSize={18}>보관함</Text>
-                        </HStack>
-                        <Divider my={4} />
-                        <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
-                            <Text fontSize={26} ml={5} mr={8}><FaSlackHash /></Text>
-                            <Text fontWeight={"bold"} fontSize={18}>둘러보기</Text>
-                        </HStack>    
+                        </HStack>  
                     </Grid>
                     <Divider my={3} mb={8} />
 
-                    <Text mb={8} ml={5} fontSize={15} fontWeight={"bold"}>업데이트 한 팔로워</Text>
-                    <Box w="100%" h={80} overflow={"auto"} overflowY={"scroll"}>
+                    <Text mt={10} mb={8} ml={5} fontSize={15} fontWeight={"bold"}>업데이트 한 팔로워</Text>
+                    <Box w="100%" h={96} overflow={"auto"} overflowY={"scroll"}>
                         <Grid templateColumns={"repeat(1, 1fr)"}>
                             <HStack w="100%" h={14} mb={4}cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
                                 <Text fontSize={26} ml={5} mr={8}><FaUserCircle /></Text>

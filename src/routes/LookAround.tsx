@@ -7,17 +7,18 @@ import HomeVideo from "../components/HomeVideo";
 import HomeText from "../components/HomeText";
 import { useState } from "react";
 
-export default function Home(){
+export default function LookAround() {
     const gray = useColorModeValue("gray.600", "gray.300")
-
     return (
         <>
 
         <VStack>
             <Box w="100%">
                 <HStack alignItems={"flex-start"} ml={16} mt={8} mb={6}>
-                    <Text color={gray} fontWeight={"bold"} fontSize={24}>사진</Text>
-                    <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} />
+                    <Text color={gray} fontWeight={"bold"} fontSize={24}>사진 둘러보기</Text>
+                    <Link to={"/api/v1/photos"}>
+                        <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} />
+                    </Link>
                 </HStack>
             </Box>
             
@@ -30,7 +31,7 @@ export default function Home(){
 
             <Box w="100%">
                 <HStack alignItems={"flex-start"} ml={16} mb={6}>
-                    <Text color={gray} fontWeight={"bold"} fontSize={24}>비디오</Text>
+                    <Text color={gray} fontWeight={"bold"} fontSize={24}>비디오 둘러보기</Text>
                     <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />}  />
                 </HStack>    
             </Box>
@@ -43,7 +44,7 @@ export default function Home(){
 
             <Box w="100%">
                 <HStack alignItems={"flex-start"} ml={16} mb={6}>
-                    <Text color={gray} fontWeight={"bold"} fontSize={24}>글</Text>
+                    <Text color={gray} fontWeight={"bold"} fontSize={24}>글 둘러보기</Text>
                     <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} />
                 </HStack>
             </Box>
