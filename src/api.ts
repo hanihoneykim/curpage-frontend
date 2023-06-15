@@ -11,3 +11,8 @@ export const getPhotoDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, photoPk] = queryKey;
     return instance.get(`photos/${photoPk}`).then((response) => response.data);
 };
+
+export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
+    const [_, userPk] = queryKey;
+    return instance.get(`users/${userPk}`).then((response) => response.data);
+};
