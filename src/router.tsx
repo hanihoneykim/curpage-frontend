@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./components/Root";
-import Home from "./routes/Home";
+import FollowTimeline from "./routes/FollowTimeline";
 import NotFound from "./routes/NotFound";
 import MyPage from "./routes/MyPage";
 import LookAround from "./routes/LookAround";
@@ -15,15 +15,15 @@ const router = createBrowserRouter([{
     children:[
         {
             path:"",
-            element:<Home/>,
+            element:<LookAround/>,
         },
         {
             path:"/api/v1/users/me",
             element:<MyPage/>,
         },
         {
-            path:"/lookaround",
-            element:<LookAround/>,
+            path:"/follow-timeline",
+            element:<FollowTimeline/>,
         },
         {
             path:"/api/v1/photos",

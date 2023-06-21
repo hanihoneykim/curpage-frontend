@@ -1,5 +1,5 @@
 import { Box, Grid } from "@chakra-ui/react";
-import HomePhoto from "../components/HomePhoto";
+import HomePhoto from "../components/FollowPhoto";
 import LookPhoto from "../components/LookPhoto";
 import { useQuery } from "@tanstack/react-query"
 import { getLookPhotos } from "../api";

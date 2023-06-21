@@ -31,3 +31,24 @@ export interface ITag {
     name:string;
     pk:number;
 }
+
+export interface IHome {
+    pk: number;
+    photo: string;
+    photos:{
+        pk:number;
+        photo:string;
+    }[];
+    videos:{
+        pk:number;
+        title:string;
+        video:string;
+    }[];
+    texts:{
+        pk:number;
+        title:string;
+        user:{
+            name:string;
+        }
+    }[];
+}

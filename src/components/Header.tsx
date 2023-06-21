@@ -55,8 +55,8 @@ export default function Header(){
             <HStack spacing={5}>
                 <IconButton onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
                 <Select value={selectedOption} onChange={handleOptionChange} mb={6} mt={12} ml={20} bg='rgba(255,255,255,0.1)' borderColor='rgba(255,255,255,0.1)' color='white' w={44} h={10}>
-                    <option value='/'>팔로잉</option>
-                    <option value='/lookaround'>둘러보기</option>
+                    <option value='/'>둘러보기</option>
+                    <option value='/follow-timeline'>팔로잉</option>
                 </Select>
                 <Button onClick={onLoginOpen}>Log In</Button>
                 <Button onClick={onSignupOpen} colorScheme={"blue"}>Sign Up</Button>

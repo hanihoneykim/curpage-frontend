@@ -5,7 +5,14 @@ const instance = axios.create({
     baseURL:"http://127.0.0.1:8000/api/v1/"
 })
 
+const homeInstance = axios.create({
+    baseURL:"http://127.0.0.1:8000/"
+})
+
+
 export const getLookPhotos = () => instance.get("photos/").then(response => response.data)
+
+export const HomeLook = () => homeInstance.get("").then(response => response.data)
 
 export const getPhotoDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, photoPk] = queryKey;

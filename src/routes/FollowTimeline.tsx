@@ -2,12 +2,12 @@ import { Box, Button, Grid, HStack, IconButton, Image, Select, Text, VStack, use
 import { relative } from "path";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight } from "react-icons/fa";
-import HomePhoto from "../components/HomePhoto";
-import HomeVideo from "../components/HomeVideo";
-import HomeText from "../components/HomeText";
+import FollowPhoto from "../components/FollowPhoto";
+import FollowVideo from "../components/FollowVideo";
+import FollowText from "../components/FollowText";
 import { useState } from "react";
 
-export default function Home(){
+export default function FollowTimeline(){
     const gray = useColorModeValue("gray.600", "gray.300")
 
     return (
@@ -24,7 +24,7 @@ export default function Home(){
             
             <Box pl={14} w="100%" h="30rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
                 <Grid gap={10} gridAutoFlow={"column"} templateRows={"repeat(2,1fr)"}>
-                    {[1,2,3,4].map((index) => (<HomePhoto key={index} /> ))}
+                    {[1,2,3,4].map((index) => (<FollowPhoto key={index} /> ))}
                 </Grid>
             </Box>
 
@@ -37,7 +37,7 @@ export default function Home(){
 
             <Box pl={14} w="100%" h="18rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
                 <Grid gap={10} gridAutoFlow={"column"} templateRows={"repeat(1,1fr)"}>
-                    <HomeVideo />
+                    <FollowVideo />
                 </Grid>
             </Box>
 
@@ -50,7 +50,7 @@ export default function Home(){
 
             <Box pl={14} w="100%" h="30rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
                 <Grid gap={5} templateColumns={"repeat(1,1fr)"}>
-                    <HomeText />
+                    <FollowText />
 
                 </Grid>
             </Box>

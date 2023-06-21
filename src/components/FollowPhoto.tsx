@@ -1,6 +1,7 @@
 import { Box, Image } from "@chakra-ui/react";
 
-export default function HomePhoto(){
+
+export default function FollowPhoto(){
     return (
         <>
             <Box w={44} h={44} backgroundColor="gray">
