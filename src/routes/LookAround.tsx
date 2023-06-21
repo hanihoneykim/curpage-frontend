@@ -1,7 +1,7 @@
 import { Box, Button, Grid, HStack, IconButton, Image, Select, Text, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { relative } from "path";
 import { Link, useNavigate } from "react-router-dom";
-import { FaAngleDoubleRight } from "react-icons/fa";
+import { FaAngleDoubleRight, FaArrowCircleRight } from "react-icons/fa";
 import FollowVideo from "../components/FollowVideo";
 import FollowText from "../components/FollowText";
 import { useState } from "react";
@@ -35,13 +35,14 @@ export default function LookAround() {
                 </HStack>
             </Box>
             
-            
-            <Box pl={14} w="100%" h="30rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
-                <Grid gap={10} gridAutoFlow={"column"} templateRows={"repeat(2,1fr)"}>
-                {data?.photos.map(home => (
+
+            <Box mr={10} pl={14} w="100%" h="35rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
+                <Grid gap={10} gridAutoFlow={"column"} gridTemplateColumns="repeat(6, 1fr)" gridTemplateRows="repeat(2, 1fr)">
+                {data?.photos.slice(0, 14).map(home => (
                     <LookHomePhoto photo={home.photo} pk={home.pk} />))}
                 </Grid>
             </Box>
+                
 
             <Box w="100%">
                 <HStack alignItems={"flex-start"} ml={16} mb={6}>

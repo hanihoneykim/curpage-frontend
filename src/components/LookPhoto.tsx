@@ -23,7 +23,7 @@ export default function LookPhoto(
         <VStack>
             <Link to={`${pk}`}>
                 <Box w={72} h={72} backgroundColor="gray">
-                    <Image minH="72" src={photo}/>
+                    <Image w={72} h={72} src={photo}/>
                 </Box>
             </Link>
             <Link to={`${pk}`}>

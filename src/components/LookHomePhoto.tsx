@@ -10,9 +10,9 @@ interface IPhotoProps {
 export default function LookHomePhoto({photo, pk}:IPhotoProps){
     return (
         <>
-        <Link to={`${pk}`}>
-            <Box w={44} h={44} backgroundColor="gray">
-                <Image minH="44" src={photo}/>
+        <Link to={`api/v1/photos/${pk}`}>
+            <Box w={60} h={60} backgroundColor="gray">
+                <Image objectFit={"cover"} w={60} h={60} src={photo}/>
             </Box>
         </Link> 
             
