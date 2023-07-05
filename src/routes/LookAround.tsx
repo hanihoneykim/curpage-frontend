@@ -7,39 +7,48 @@ import FollowText from "../components/FollowText";
 import { useState } from "react";
 import LookHomePhoto from "../components/LookHomePhoto";
 import { isError, useQuery } from "@tanstack/react-query";
-import { HomeLook } from "../api";
+import { fetchHomeData } from "../api";
 import { IHome } from "../types";
 import { error } from "console";
 
 export default function LookAround() {
     const gray = useColorModeValue("gray.600", "gray.300")
-    const { isLoading, data} = 
-        useQuery<{ photos: IHome[]; texts: IHome[]; videos: IHome[]; }>(["photos"], HomeLook)
+    const { isLoading, data } = useQuery<{ photos: IHome[]; texts: IHome[]; videos: IHome[] }>(
+    ["photos"],
+    fetchHomeData,
+    );
+    
+    if (isLoading) {
+        return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
+    }
+    
+    if (!data) {
+    return <div>No data available</div>; // 데이터가 없을 때 표시할 UI
+    }
 
-    /*
     console.log(data)
-    console.log(Array.isArray(data))
-    console.log(data?.photos)
-    */
+
+
     
     return (
         <>
 
         <VStack>
             <Box w="100%">
-                <HStack alignItems={"flex-start"} ml={16} mt={8} mb={6}>
-                    <Text color={gray} fontWeight={"bold"} fontSize={24}>사진 둘러보기</Text>
-                    <Link to={"/api/v1/photos"}>
-                        <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} />
-                    </Link>
-                </HStack>
+                <Link to={"/api/v1/photos"}>
+                    <HStack alignItems={"flex-start"} ml={16} mt={8} mb={6}>
+                        <Text color={gray} fontWeight={"bold"} fontSize={24}>사진 둘러보기</Text>
+                        <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} disabled={isLoading} />
+                    </HStack>
+                </Link>
             </Box>
             
 
             <Box mr={10} pl={14} w="100%" h="35rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
                 <Grid gap={10} gridAutoFlow={"column"} gridTemplateColumns="repeat(6, 1fr)" gridTemplateRows="repeat(2, 1fr)">
-                {data?.photos.slice(0, 14).map(home => (
-                    <LookHomePhoto photo={home.photo} pk={home.pk} />))}
+                {data && data?.photos && data?.photos.map((home) => (
+                <LookHomePhoto photo={home.photo} pk={home.pk} key={home.pk} /> // photo와 pk prop을 전달
+                ))}
                 </Grid>
             </Box>
                 
