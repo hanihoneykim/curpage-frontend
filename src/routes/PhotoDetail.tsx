@@ -37,12 +37,15 @@ export default function PhotoDetail() {
                             {data?.tags.map((tag) => (<Tag name={tag.name} />))}
                         </Box>
                         <Divider/>
-                        <HStack ml={9} mt={8}>
+                        <HStack ml={7} mt={5}>
                             <IconButton aria-label="like" variant={"ghost"} icon={<FaHeart />} />
                             <IconButton aria-label="bookmark" variant={"ghost"} icon={<FaBookmark />} />
                             <IconButton aria-label="sharez" variant={"ghost"} icon={<FaShare />} />
                         </HStack>
-                        <VStack w="100%" display={"flex"} alignItems={"flex-start"} justifyContent={"flex-start"} mt={10} ml={12}>
+                        <Box pt={8} pl={10}>
+                            <Text fontWeight={"bold"} fontSize={18}>Comment</Text>
+                        </Box>
+                        <VStack w="100%" display={"flex"} alignItems={"flex-start"} justifyContent={"flex-start"} mt={5} ml={10}>
                             {data?.comments.map((comment) => (<Comment comment={comment.comment} user={{name:comment.user.name}} />))}
                         </VStack>
                     </Box>

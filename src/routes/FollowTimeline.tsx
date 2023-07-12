@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight } from "react-icons/fa";
 import FollowPhoto from "../components/FollowPhoto";
 import FollowVideo from "../components/FollowVideo";
-import FollowText from "../components/FollowText";
+import FollowText from "../components/LookHomeText";
 import { useState } from "react";
 
 export default function FollowTimeline(){
@@ -47,13 +47,14 @@ export default function FollowTimeline(){
                     <IconButton color={gray} fontSize={20} aria-label="more follower's photos" variant={"unstyled"} icon={<FaAngleDoubleRight />} />
                 </HStack>
             </Box>
-
+{/*
             <Box pl={14} w="100%" h="30rem" overflow={"auto"} overflowX={"scroll"} css={{'&::-webkit-scrollbar': { display:"none"}}}>
                 <Grid gap={5} templateColumns={"repeat(1,1fr)"}>
                     <FollowText />
 
                 </Grid>
             </Box>
+    */}            
 
         </VStack>
         </>

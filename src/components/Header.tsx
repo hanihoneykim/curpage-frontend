@@ -8,15 +8,18 @@ import {
     useColorMode,
     useColorModeValue,
     useDisclosure,
+    Avatar,
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import SideBar from "./SideBar";
 import { useEffect, useState } from "react";
+import useUser from "../lib/useUser";
 
 
 export default function Header(){
+    const { userLoading, isLoggedIn, user } = useUser();
     const { isOpen:isLoginOpen, onClose:onLoginClose, onOpen:onLoginOpen } = useDisclosure();
     const { isOpen:isSignupOpen, onClose:onSignupClose, onOpen:onSignupOpen} = useDisclosure();
     const { isOpen:isSideOpen, onClose:onSideClose, onOpen:onSideOpen} = useDisclosure();
@@ -53,13 +56,26 @@ export default function Header(){
             </HStack>
 
             <HStack spacing={5}>
-                <IconButton onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
+                {/*
                 <Select value={selectedOption} onChange={handleOptionChange} mb={6} mt={12} ml={20} bg='rgba(255,255,255,0.1)' borderColor='rgba(255,255,255,0.1)' color='white' w={44} h={10}>
                     <option value='/'>둘러보기</option>
                     <option value='/follow-timeline'>팔로잉</option>
                 </Select>
+                */}
+                {!userLoading ? (
+                    !isLoggedIn ? ( 
+                <>
+                <IconButton onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
                 <Button onClick={onLoginOpen}>Log In</Button>
-                <Button onClick={onSignupOpen} colorScheme={"blue"}>Sign Up</Button>
+                <Button onClick={onSignupOpen} colorScheme={"blue"}>Sign Up</Button>    
+                </>
+                ) : ( 
+                <Box mr={12}>
+                    <IconButton mr={7} onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
+                    <Avatar name={user.name} src={user.profile_photo} size={'md'} />
+                </Box>
+                )) : null}
+                
             </HStack>
             <LoginModal isOpen={isLoginOpen} onClose={onLoginClose}/>
             <SignUpModal isOpen={isSignupOpen} onClose={onSignupClose}/>

@@ -9,7 +9,7 @@ export interface ICommentProps {
 
 export default function Comment({comment, user}:ICommentProps) {
     return (
-        <HStack>
+        <HStack my={3}>
             <Text mr={7} fontWeight={"bold"}>{user.name}</Text>
             <Text>{comment}</Text>
         </HStack>

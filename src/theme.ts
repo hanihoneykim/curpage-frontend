@@ -1,26 +1,31 @@
 import { extendTheme, type ThemeConfig } from "@chakra-ui/react";
+import "@fontsource/roboto";
 
-const components = {
-    Drawer: {
-    variants: {
-        alwaysOpen: {
-        parts: ["dialog, dialogContainer"],
-        dialog: {
-            pointerEvents: "auto"
-        },
-        dialogContainer: {
-            pointerEvents: "none"
-        }
-        }
-    }
-    }
+const config: ThemeConfig = {
+    initialColorMode: "dark",
+    useSystemColorMode: false,
 };
 
-const config:ThemeConfig = {
-    initialColorMode:"dark",
-    useSystemColorMode:false,
-}
-
-const theme = extendTheme({ config, components });
+const theme = extendTheme({
+    config,
+    fonts: {
+        body: `'Roboto', san-serif`,
+    },
+    components: {
+        Drawer: {
+        variants: {
+            alwaysOpen: {
+            parts: ["dialog", "dialogContainer"],
+            dialog: {
+                pointerEvents: "auto",
+            },
+            dialogContainer: {
+                pointerEvents: "none",
+            },
+            },
+        },
+        },
+    },
+});
 
 export default theme;

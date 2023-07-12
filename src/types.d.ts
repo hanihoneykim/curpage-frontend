@@ -8,12 +8,30 @@ export interface IPhotoDetail {
     created_at: string;
     updated_at: string;
     description: string;
+    title:string;
     user:IUserBy;
     tags:ITag[];
-    title:string;
     photo:string;
     comments:IComment[];
 }
+
+export interface ITextDetail {
+    created_at: string;
+    updated_at: string;
+    title:string;
+    body: string;
+    user:IUserBy;
+    tags:ITag[];
+    comments:IComment[];
+    total_likes:number;
+}
+
+export interface IText {
+    pk:number;
+    title:string;
+    user:IUserBy;
+}
+
 
 export interface IUserBy {
     name:string;
@@ -35,6 +53,8 @@ export interface ITag {
 export interface IHome {
     pk: number;
     photo: string;
+    title:string;
+    user:IUserBy;
     photos:{
         pk:number;
         photo:string;
@@ -51,4 +71,17 @@ export interface IHome {
             name:string;
         }
     }[];
+}
+
+export interface IUser {
+    last_login: string;
+    username: string;
+    email: string;
+    date_joined: string;
+    avatar: string;
+    name: string;
+    is_host: boolean;
+    gender: string;
+    language: string;
+    currency: string;
 }
