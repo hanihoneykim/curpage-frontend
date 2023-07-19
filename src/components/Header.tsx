@@ -9,6 +9,11 @@ import {
     useColorModeValue,
     useDisclosure,
     Avatar,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    useToast,
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
@@ -16,6 +21,8 @@ import SignUpModal from "./SignUpModal";
 import SideBar from "./SideBar";
 import { useEffect, useState } from "react";
 import useUser from "../lib/useUser";
+import { logOut } from "../api";
+import { useQueryClient } from "@tanstack/react-query";
 
 
 export default function Header(){
@@ -29,6 +36,22 @@ export default function Header(){
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedOption, setSelectedOption] = useState("");
+    const toast = useToast();
+    const queryClient = useQueryClient();
+    const onLogOut = async() => {
+        const toastId = toast({
+            title:"Login Out...",
+            description:"Sad to see you go...",
+            status:"loading",
+        })
+        await logOut();
+        queryClient.refetchQueries(['me']);
+        toast.update(toastId, {
+            title:"Good Bye!",
+            description:"See you later!",
+            status:"success",
+        })
+    }
 
     const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = event.target.value;
@@ -71,8 +94,15 @@ export default function Header(){
                 </>
                 ) : ( 
                 <Box mr={12}>
-                    <IconButton mr={7} onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
-                    <Avatar name={user.name} src={user.profile_photo} size={'md'} />
+                    <IconButton pt={4} mr={7} onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
+                    <Menu>
+                        <MenuButton>
+                            <Avatar name={user.name} src={user.profile_photo} size={'md'} />
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem onClick={onLogOut}>Log out</MenuItem>
+                        </MenuList>
+                    </Menu>
                 </Box>
                 )) : null}
                 
