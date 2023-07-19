@@ -8,5 +8,5 @@ export default function NotFound(){
         <Link to="/">
             <Button>Go Home</Button>
         </Link>
-    </VStack>;
+    </VStack>
 }

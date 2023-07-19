@@ -8,6 +8,7 @@ import LookPhotoList from "./routes/LookPhotoList";
 import PhotoDetail from "./routes/PhotoDetail";
 import LookTextList from "./routes/LookTextList";
 import TextDetail from "./routes/TextDetail";
+import GithubConfirm from "./routes/GithubConfirm";
 
 
 
@@ -40,6 +41,15 @@ const router = createBrowserRouter([{
             path:"api/v1/texts/:textPk",
             element:<TextDetail/>,
         },
+        {
+            path:"social",
+            children:[
+                {
+                    path:"github",
+                    element: <GithubConfirm />,
+                }
+            ]
+        }
     ]
 }])
 

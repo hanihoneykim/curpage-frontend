@@ -39,6 +39,12 @@ export const logOut = () => instance.post(`users/log-out`, null, {
     },
 }).then((response) => response.data);
 
+export const githubLogIn = (code:string) => instance.post(`users/github`, { code }, {
+    headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+    },
+}).then((response) => response.status);
+
 export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, userPk] = queryKey;
     return instance.get(`users/${userPk}`).then((response) => response.data);
