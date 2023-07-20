@@ -47,8 +47,8 @@ export default function Header(){
         await logOut();
         queryClient.refetchQueries(['me']);
         toast.update(toastId, {
-            title:"Good Bye!",
-            description:"See you later!",
+            title:"또 봐요!",
+            description:"금방 돌아오세요!",
             status:"success",
         })
     }
