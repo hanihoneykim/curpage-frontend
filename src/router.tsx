@@ -9,6 +9,7 @@ import PhotoDetail from "./routes/PhotoDetail";
 import LookTextList from "./routes/LookTextList";
 import TextDetail from "./routes/TextDetail";
 import GithubConfirm from "./routes/GithubConfirm";
+import KakaoConfirm from "./routes/KakaoConfirm";
 
 
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([{
                 {
                     path:"github",
                     element: <GithubConfirm />,
+                },
+                {
+                    path:"kakao",
+                    element: <KakaoConfirm />,
                 }
             ]
         }

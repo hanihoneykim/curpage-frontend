@@ -45,6 +45,12 @@ export const githubLogIn = (code:string) => instance.post(`users/github`, { code
     },
 }).then((response) => response.status);
 
+export const kakaoLogIn = (code:string) => instance.post(`users/kakao`, { code }, {
+    headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+    },
+}).then((response) => response.status);
+
 export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, userPk] = queryKey;
     return instance.get(`users/${userPk}`).then((response) => response.data);

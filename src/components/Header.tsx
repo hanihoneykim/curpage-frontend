@@ -1,4 +1,5 @@
 import { FaAirbnb, FaMoon, FaIceCream, FaSun } from "react-icons/fa";
+import { HiNewspaper } from "react-icons/hi"
 import {
     Box,
     Button,
@@ -14,6 +15,7 @@ import {
     MenuList,
     MenuItem,
     useToast,
+    Text,
 } from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginModal from "./LoginModal";
@@ -68,12 +70,15 @@ export default function Header(){
     }, [location]);
     
     return (
-        <HStack justifyContent={"space-between"} p={10} borderBottomWidth={1}>
-            <HStack justifyContent={"flex-start"} spacing={12}>
-                <SideBar isOpen={isSideOpen} onClose={onSideClose} onOpen={onSideOpen} />
+        <HStack justifyContent={"space-between"} p={8} borderBottomWidth={1}>
+            <HStack pl={2} justifyContent={"flex-start"} spacing={8}>
+                {/* <SideBar isOpen={isSideOpen} onClose={onSideClose} onOpen={onSideOpen} /> */}
                 <Box color={logoColor}>
                     <Link to={"/"}>
-                        <FaIceCream size={"38"}/>
+                        <HStack>
+                            <HiNewspaper size={"44"}/>
+                            <Text fontSize={"20"} fontWeight={"extrabold"}>CURPAGE</Text>
+                        </HStack>
                     </Link>
                 </Box>
             </HStack>
