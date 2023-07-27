@@ -51,6 +51,28 @@ export const kakaoLogIn = (code:string) => instance.post(`users/kakao`, { code }
     },
 }).then((response) => response.status);
 
+export interface IUsernameLogInVariables {
+    username:string;
+    password:string;
+}
+export interface IUsernameLogInSuccess {
+    OK:string;
+}
+export interface IUsernameLogInError {
+    error:string;
+}
+
+export const usernameLogIn = ({username, password}:IUsernameLogInVariables) => instance.post(`users/log-in`, { username, password }, {
+    headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+    },
+}).then((response) => response.data);
+/* mutation 함수는 하나의 argument를 가지지 않고 object를 가져옴 ({username, password} 부분)*/
+/* 백엔드의 views-login을 보면서 작성중 */
+
+
+
+
 export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, userPk] = queryKey;
     return instance.get(`users/${userPk}`).then((response) => response.data);
