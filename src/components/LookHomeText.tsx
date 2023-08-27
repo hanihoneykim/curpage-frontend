@@ -16,7 +16,7 @@ const LookHomeText: React.FC<ITextProps> = ({ title, user, pk }) =>{
         <>
         <Link to={`api/v1/texts/${pk}`}>
             <Box w={"100%"} h={12} borderBottom={"1px solid gray"}>
-                <Text fontWeight="700" fontSize={22}>{title}</Text>
+                <Text fontWeight="700" fontSize={18}>{title}</Text>
             </Box>
         </Link>
             <Box w={"100%"} h={12} borderBottom={"1px solid gray"}>

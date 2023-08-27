@@ -33,7 +33,7 @@ export default function LookAround() {
         <VStack px={10} pb={20}>
             <Box w="100%">
                 <Link to={"/api/v1/photos"}>
-                    <Button rightIcon={<FaAngleDoubleRight />} ml={10} mt={14} mb={10} size='md' height='48px' width='200px' fontSize={20} colorScheme='blue'> 사진 둘러보기 </Button>
+                    <Button rightIcon={<FaAngleDoubleRight />} ml={8} mt={14} mb={10} size='md' fontSize={16} colorScheme='gray'> 사진 둘러보기 </Button>
                 </Link>
             </Box>
             
@@ -49,7 +49,7 @@ export default function LookAround() {
 
             <Box w="100%" py={10}>
                 <Link to={"/api/v1/texts"}>
-                    <Button rightIcon={<FaAngleDoubleRight />} ml={10} size='md' height='48px' width='200px' fontSize={20} colorScheme='blue'> 글 둘러보기 </Button>
+                    <Button rightIcon={<FaAngleDoubleRight />} ml={8} mt={6} size='md' fontSize={16} colorScheme='gray'> 글 둘러보기 </Button>
                 </Link>
             </Box>
 

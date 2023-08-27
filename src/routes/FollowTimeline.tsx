@@ -2,7 +2,7 @@ import { Box, Button, Grid, HStack, IconButton, Image, Select, Text, VStack, use
 import { relative } from "path";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight } from "react-icons/fa";
-import FollowPhoto from "../components/FollowPhoto";
+import FollowPhoto from "../components/follow/FollowPhoto";
 import FollowVideo from "../components/FollowVideo";
 import FollowText from "../components/LookHomeText";
 import { useState } from "react";

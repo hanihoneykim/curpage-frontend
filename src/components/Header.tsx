@@ -34,7 +34,7 @@ export default function Header(){
     const { isOpen:isSideOpen, onClose:onSideClose, onOpen:onSideOpen} = useDisclosure();
     const { colorMode, toggleColorMode } = useColorMode();
     const Icon = useColorModeValue(FaMoon, FaSun);  //컴포넌트 일때는 첫 글자 무조건 대문자
-    const logoColor  = useColorModeValue("blue.500", "blue.200");
+    const logoColor  = useColorModeValue("gray.900", "white");
     const navigate = useNavigate();
     const location = useLocation();
     const [selectedOption, setSelectedOption] = useState("");
@@ -72,7 +72,7 @@ export default function Header(){
     return (
         <HStack justifyContent={"space-between"} p={8} borderBottomWidth={1}>
             <HStack pl={2} justifyContent={"flex-start"} spacing={8}>
-                {/* <SideBar isOpen={isSideOpen} onClose={onSideClose} onOpen={onSideOpen} /> */}
+                <SideBar isOpen={isSideOpen} onClose={onSideClose} onOpen={onSideOpen} />
                 <Box color={logoColor}>
                     <Link to={"/"}>
                         <HStack>

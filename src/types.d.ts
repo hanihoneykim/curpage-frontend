@@ -85,3 +85,21 @@ export interface IUser {
     language: string;
     currency: string;
 }
+
+export interface IUserInfo {
+    name:string;
+    username: string;
+    email: string;
+    avatar: string;
+    count_followers:number;
+    count_followings:number;
+    count_photos:number;
+    count_texts:number;
+    total_photos:{
+        title:string;
+        photo:string;
+    }[];
+    total_texts:string;
+    total_followers:string;
+    total_following:string;
+}
