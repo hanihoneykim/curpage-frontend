@@ -2,20 +2,32 @@ import { getLookTexts } from "../api";
 import { useQuery } from "@tanstack/react-query"
 import { getLookPhotos } from "../api";
 import { IText } from "../types";
-import { Box, Button, Grid, HStack, Text, VStack } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Box, Button, Flex, Grid, HStack, Spinner, Stack, Text, VStack } from "@chakra-ui/react";
 import LookHomeText from "../components/LookHomeText";
 import TextList from "../components/TextList";
 import { TfiWrite } from "react-icons/tfi";
+import { Link } from "react-router-dom";
 
 
 export default function LookTextList() {
     const { isLoading, data } = useQuery<IText[]>(["texts"], getLookTexts);
     if (isLoading) {
-        return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
+        return (
+            <Flex w="100%" h="80vh" justifyContent={"center"} alignItems={"center"}>
+                <Stack direction='row' spacing={4}>
+                    <Spinner size='xl' />
+                </Stack>
+            </Flex>
+        )
     }
     
     if (!data) {
-    return <div>No data available</div>; // 데이터가 없을 때 표시할 UI
+        return(
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>잘못된 경로입니다.</AlertTitle>
+            </Alert>
+        ) // 데이터가 없을 때 표시할 UI
     }
     
     return (
@@ -25,7 +37,9 @@ export default function LookTextList() {
                 <Text fontSize={22} fontWeight={900} mr={2}><TfiWrite /></Text>
                 <Text fontSize={20} fontWeight={900}>Texts</Text>
             </HStack>
-            <Button size='md' fontSize={14} colorScheme='gray'>글 업로드</Button>
+            <Link to="/api/v1/texts/uploads">
+                <Button size='md' fontSize={14} colorScheme='gray'>글 업로드</Button>
+            </Link>
         </HStack>
 
         <Box px={20} pt={14} pb={20}>

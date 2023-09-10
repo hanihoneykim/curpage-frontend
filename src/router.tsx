@@ -10,6 +10,8 @@ import LookTextList from "./routes/LookTextList";
 import TextDetail from "./routes/TextDetail";
 import GithubConfirm from "./routes/GithubConfirm";
 import KakaoConfirm from "./routes/KakaoConfirm";
+import UploadPhoto from "./routes/UploadPhoto";
+import UploadText from "./routes/UploadText";
 
 
 
@@ -31,6 +33,10 @@ const router = createBrowserRouter([{
             element:<LookPhotoList/>,
         },
         {
+            path:"api/v1/photos/uploads",
+            element:<UploadPhoto/>,
+        }, //순서에 주의! :Pk보다 uploads가 위에 있어야 photos/--가 안 꼬임
+        {
             path:"api/v1/photos/:photoPk",
             element:<PhotoDetail/>,
         },
@@ -38,6 +44,10 @@ const router = createBrowserRouter([{
             path:"api/v1/texts",
             element:<LookTextList/>,
         },
+        {
+            path:"api/v1/texts/uploads",
+            element:<UploadText/>,
+        }, //순서 주의!
         {
             path:"api/v1/texts/:textPk",
             element:<TextDetail/>,

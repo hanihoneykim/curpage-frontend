@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, HStack, IconButton, Image, Select, Text, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Box, Button, Divider, Flex, Grid, HStack, IconButton, Image, Select, Spinner, Stack, Text, VStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { relative } from "path";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight, FaArrowCircleRight } from "react-icons/fa";
@@ -18,11 +18,22 @@ export default function LookAround() {
     );
     
     if (isLoading) {
-        return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
+        return (
+            <Flex w="100%" h="80vh" justifyContent={"center"} alignItems={"center"}>
+                <Stack direction='row' spacing={4}>
+                    <Spinner size='xl' />
+                </Stack>
+            </Flex>
+        )
     }
     
     if (!data) {
-    return <div>No data available</div>; // 데이터가 없을 때 표시할 UI
+        return(
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>잘못된 경로입니다.</AlertTitle>
+            </Alert>
+        ) // 데이터가 없을 때 표시할 UI
     }
 
     

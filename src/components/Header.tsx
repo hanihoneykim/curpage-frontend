@@ -105,6 +105,12 @@ export default function Header(){
                             <Avatar name={user.name} src={user.profile_photo} size={'md'} />
                         </MenuButton>
                         <MenuList>
+                            <Link to="/api/v1/photos/uploads">
+                                <MenuItem>사진 업로드</MenuItem>
+                            </Link>
+                            <Link to="/api/v1/texts/uploads">
+                                <MenuItem>글 업로드</MenuItem>
+                            </Link>
                             <MenuItem onClick={onLogOut}>Log out</MenuItem>
                         </MenuList>
                     </Menu>

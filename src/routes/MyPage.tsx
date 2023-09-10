@@ -1,13 +1,14 @@
-import { Avatar, Box, Flex, Grid, Text, VStack } from "@chakra-ui/react";
+import { Alert, AlertIcon, AlertTitle, Avatar, Box, CircularProgress, Flex, Grid, Spinner, Stack, Text, VStack } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import { useQuery } from "@tanstack/react-query";
 import { IUserInfo } from "../types";
 import { getMe } from "../api";
 import useUser from "../lib/useUser";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { MyPagePhotos } from "../components/MyPagePhotos";
 import { MyPageTexts } from "../components/MyPageTexts";
+import ProtectedPage from "../components/ProtectedPage";
 
 
 export default function MyPage(){
@@ -17,18 +18,38 @@ export default function MyPage(){
         ); 
     const { userLoading, isLoggedIn, user } = useUser();
     const location = useLocation();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!userLoading) {
+            if(!isLoggedIn){
+                navigate("/");
+            }
+        }
+    }, [isLoggedIn, userLoading, navigate])
 
     if (isLoading) {
-        return <div>Loading...</div>; // 로딩 중일 때 표시할 UI
+        return (
+            <Flex w="100%" h="80vh" justifyContent={"center"} alignItems={"center"}>
+                <Stack direction='row' spacing={4}>
+                    <Spinner size='xl' />
+                </Stack>
+            </Flex>
+        )
     }
     
     if (!data) {
-    return <div>No data available</div>; // 데이터가 없을 때 표시할 UI
+        return(
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>잘못된 접근입니다.</AlertTitle>
+            </Alert>
+        ) // 데이터가 없을 때 표시할 UI
     }
 
-    console.log(data.total_texts[0].title)
+
     return (
-        <VStack w="100%">
+        <ProtectedPage>
+            <VStack w="100%">
             <Flex mt={16} mb={16} w="100%" justifyContent={"center"} alignItems={"center"}>
                 <Avatar name={user.name} src={user.profile_photo} w={44} h={44} />
                 <VStack ml={10}>
@@ -53,8 +74,8 @@ export default function MyPage(){
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <Box w="50rem" h="35rem">
-                            <Grid gap={10} ml={4} gridAutoFlow={"row"} gridTemplateColumns="repeat(4, 1fr)">
+                        <Box w="50rem" h="35rem" mt={10}>
+                            <Grid gap={10} ml={3} gridAutoFlow={"row"} gridTemplateColumns="repeat(4, 1fr)">
                                 {data && data?.total_photos && data?.total_photos.map((total_photos) => (
                                     <MyPagePhotos image_url={total_photos.image_url} pk={total_photos.pk} key={total_photos.pk} /> // photo와 pk prop을 전달
                                 ))}
@@ -63,7 +84,7 @@ export default function MyPage(){
                     </TabPanel>
                     <TabPanel>
                         <Box w="50rem" h="35rem" mt={10}>
-                            <Grid gap={10} ml={4} gridAutoFlow={"row"} gridTemplateRows={"repeat(1,1fr)"}>
+                            <Grid gap={10} ml={3} gridAutoFlow={"row"} gridTemplateRows={"repeat(1,1fr)"}>
                                 {data && data?.total_texts && data?.total_texts.map((text) => (
                                     <MyPageTexts title={text.title} pk={text.pk} />
                                 ))}
@@ -74,5 +95,6 @@ export default function MyPage(){
 
             </Tabs>
         </VStack>
+        </ProtectedPage>
     )
 }
