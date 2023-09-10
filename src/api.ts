@@ -74,7 +74,16 @@ export const usernameLogIn = ({username, password}:IUsernameLogInVariables) => i
 /* mutation 함수는 하나의 argument를 가지지 않고 object를 가져옴 ({username, password} 부분)*/
 /* 백엔드의 views-login을 보면서 작성중 */
 
+interface ISignUpVariables {
+    name: string;
+    email: string;
+    username: string;
+    password: string;
+}
 
+    export const SignUp = ({username, password, email, name}: ISignUpVariables) => instance.post(`users/`,{ username, password, email, name },{
+        headers: { "X-CSRFToken": Cookie.get("csrftoken") || "" },
+    }).then((response) => response.data);
 
 
 export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
