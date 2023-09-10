@@ -96,10 +96,13 @@ export interface IUserInfo {
     count_photos:number;
     count_texts:number;
     total_photos:{
-        title:string;
-        photo:string;
+        image_url:string;
+        pk:number;
     }[];
     total_texts:string;
     total_followers:string;
     total_following:string;
+    image_url:string;
+    pk:number;
+    title:string;
 }

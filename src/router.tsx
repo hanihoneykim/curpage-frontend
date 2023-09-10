@@ -10,8 +10,6 @@ import LookTextList from "./routes/LookTextList";
 import TextDetail from "./routes/TextDetail";
 import GithubConfirm from "./routes/GithubConfirm";
 import KakaoConfirm from "./routes/KakaoConfirm";
-import MyPagePhotos from "./routes/MyPagePhotos";
-import MyPageTexts from "./routes/MyPageTexts";
 
 
 
@@ -43,14 +41,6 @@ const router = createBrowserRouter([{
         {
             path:"api/v1/texts/:textPk",
             element:<TextDetail/>,
-        },
-        {
-            path:"api/v1/users/me/photos",
-            element:<MyPagePhotos/>,
-        },
-        {
-            path:"api/v1/users/me/texts",
-            element:<MyPageTexts/>,
         },
         {
             path:"social",
