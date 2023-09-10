@@ -52,7 +52,7 @@ export default function SideBar({ isOpen, onClose, onOpen}: SideBarProps) {
 
 
                     <Grid templateColumns={"repeat(1, 1fr)"} my={3}>
-                        <Link to={"api/v1/users/me"}>
+                        <Link to={"api/v1/users/me/photos"}>
                             <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
                                     <Text fontSize={26} ml={5} mr={8}><FaHome /></Text>
                                     <Text fontWeight={"bold"} fontSize={18}>마이 페이지</Text>

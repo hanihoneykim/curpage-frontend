@@ -2,7 +2,6 @@ import { Box, Button, Divider, Grid, HStack, IconButton, Image, Select, Text, VS
 import { relative } from "path";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDoubleRight, FaArrowCircleRight } from "react-icons/fa";
-import FollowVideo from "../components/FollowVideo";
 import { useState } from "react";
 import LookHomePhoto from "../components/LookHomePhoto";
 import { isError, useQuery } from "@tanstack/react-query";

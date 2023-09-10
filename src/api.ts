@@ -33,6 +33,10 @@ export const getTextDetail = ({ queryKey }: QueryFunctionContext) => {
 
 export const getMe = () => instance.get("users/me").then(response => response.data)
 
+export const getMyPhotos = () => instance.get("users/me/photos").then(response => response.data)
+
+export const getMyTexts = () => instance.get("users/me/texts").then(response => response.data)
+
 export const logOut = () => instance.post(`users/log-out`, null, {
     headers: {
         "X-CSRFToken": Cookie.get("csrftoken") || "",
