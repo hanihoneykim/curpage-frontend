@@ -13,6 +13,14 @@ export interface IPhotoDetail {
     tags:ITag[];
     photo:string;
     comments:IComment[];
+    likes:{
+        user:{
+            name:string;
+            pk:number;
+        };
+        count_likes:number;
+        is_like:boolean;
+    }[]
 }
 
 export interface ITextDetail {
@@ -24,6 +32,7 @@ export interface ITextDetail {
     tags:ITag[];
     comments:IComment[];
     total_likes:number;
+    id:number;
 }
 
 export interface IText {
@@ -105,4 +114,12 @@ export interface IUserInfo {
     image_url:string;
     pk:number;
     title:string;
+}
+
+export interface IMyLikes {
+    photo_pk:number;
+    text_pk:number;
+    photo_url:string;
+    text_title:string;
+
 }

@@ -58,14 +58,18 @@ export default function SideBar({ isOpen, onClose, onOpen}: SideBarProps) {
                                     <Text fontWeight={"bold"} fontSize={18}>마이 페이지</Text>
                             </HStack>
                         </Link>
-                        <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
-                            <Text fontSize={26} ml={5} mr={8}><FaHeart /></Text>
-                            <Text fontWeight={"bold"} fontSize={18}>좋아요 한 목록</Text>
-                        </HStack>
-                        <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
-                            <Text fontSize={26} ml={5} mr={8}><FaBox /></Text>
-                            <Text fontWeight={"bold"} fontSize={18}>보관함</Text>
-                        </HStack>  
+                        <Link to={"api/v1/users/me/likes"}>
+                            <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
+                                <Text fontSize={26} ml={5} mr={8}><FaHeart /></Text>
+                                <Text fontWeight={"bold"} fontSize={18}>좋아요 한 목록</Text>
+                            </HStack>
+                        </Link>
+                        <Link to={"api/v1/users/me/bookmarks"}>
+                            <HStack w="100%" h={14} mb={3} cursor={"pointer"} _hover={{background:"rgba(0,0,0,0.2)", borderRadius:"20px"}}>
+                                <Text fontSize={26} ml={5} mr={8}><FaBox /></Text>
+                                <Text fontWeight={"bold"} fontSize={18}>보관함</Text>
+                            </HStack>
+                        </Link>
                     </Grid>
 
                 {/*

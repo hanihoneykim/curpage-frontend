@@ -1,15 +1,46 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom"
-import { getPhotoDetail } from "../api";
-import { Box, Divider, Grid, HStack, IconButton, Image, Text, VStack, border } from "@chakra-ui/react";
+import { deleteLike, getPhotoDetail, postLikes } from "../api";
+import { Box, Divider, Flex, Grid, HStack, IconButton, Image, Text, VStack, border } from "@chakra-ui/react";
 import { IPhotoDetail } from "../types";
 import { FaBookmark, FaHeart, FaShare } from "react-icons/fa";
 import Tag from "../components/Tag";
 import Comment from "../components/Comment";
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import useUser from "../lib/useUser";
+
 
 export default function PhotoDetail() {
     const { photoPk } = useParams();
     const { isLoading, data } = useQuery<IPhotoDetail>([`photos`, photoPk], getPhotoDetail)
+    const { user } = useUser();
+    const [ isLiked, setIsLiked ] = useState(data?.likes[0]?.is_like || false);
+    const [userLiked, setUserLiked] = useState(data?.likes.some(like => like.user.pk === user) || false);
+    const [likes, setLikes] = useState(data?.likes[0]?.count_likes || 0);
+
+    const handleLikeClick = async () => {
+        try {
+            if (userLiked) {
+                // 이미 좋아요를 누른 경우
+                await deleteLike(photoPk as unknown as number);
+                setUserLiked(false); // 좋아요 취소 시 상태 업데이트
+            } else {
+                // 좋아요
+                const response = await postLikes(photoPk as unknown as number, true, user);
+                if (response.is_like === true) {
+                    setUserLiked(true); // 좋아요 성공 시 상태 업데이트
+                }
+                // 서버 응답에서 업데이트된 좋아요 카운트를 가져와 업데이트
+                const updatedLikes = response.count_likes;
+                setLikes(updatedLikes);
+            }
+        } catch (error) {
+            console.error('Error toggling like:', error);
+        }
+    };
+    
     return (
         <>
             <HStack px={40} py={16}>
@@ -37,8 +68,11 @@ export default function PhotoDetail() {
                             {data?.tags.map((tag) => (<Tag name={tag.name} />))}
                         </Box>
                         <Divider/>
-                        <HStack ml={7} mt={5}>
-                            <IconButton aria-label="like" variant={"ghost"} icon={<FaHeart />} />
+                        <HStack ml={7} mt={5} gap={4}>
+                            <Flex alignItems={"center"}>
+                                <IconButton aria-label="like" variant={"ghost"} icon={<FaHeart  color={isLiked ? 'red' :'white'}/>} onClick={handleLikeClick} />
+                                <Text fontSize={14}>{likes}</Text>
+                            </Flex>
                             <IconButton aria-label="bookmark" variant={"ghost"} icon={<FaBookmark />} />
                             <IconButton aria-label="sharez" variant={"ghost"} icon={<FaShare />} />
                         </HStack>

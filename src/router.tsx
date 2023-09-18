@@ -12,6 +12,8 @@ import GithubConfirm from "./routes/GithubConfirm";
 import KakaoConfirm from "./routes/KakaoConfirm";
 import UploadPhoto from "./routes/UploadPhoto";
 import UploadText from "./routes/UploadText";
+import MyLikes from "./routes/MyLikes";
+import MyBookmarks from "./routes/MyBookmarks";
 
 
 
@@ -27,6 +29,14 @@ const router = createBrowserRouter([{
         {
             path:"/api/v1/users/me",
             element:<MyPage/>,
+        },
+        {
+            path:"/api/v1/users/me/likes",
+            element:<MyLikes/>,
+        },
+        {
+            path:"/api/v1/users/me/bookmarks",
+            element:<MyBookmarks/>,
         },
         {
             path:"/api/v1/photos",
@@ -64,7 +74,7 @@ const router = createBrowserRouter([{
                     element: <KakaoConfirm />,
                 }
             ]
-        }
+        },
     ]
 }])
 

@@ -33,6 +33,10 @@ export const getTextDetail = ({ queryKey }: QueryFunctionContext) => {
 
 export const getMe = () => instance.get("users/me").then(response => response.data)
 
+export const getMyLikes = () => instance.get("users/me/likes").then(response => response.data)
+
+export const getMyBookmarks = () => instance.get("users/me/bookmarks").then(response => response.data)
+
 export const getMyPhotos = () => instance.get("users/me/photos").then(response => response.data)
 
 export const getMyTexts = () => instance.get("users/me/texts").then(response => response.data)
@@ -89,4 +93,49 @@ interface ISignUpVariables {
 export const getUserDetail = ({ queryKey }: QueryFunctionContext) => {
     const [_, userPk] = queryKey;
     return instance.get(`users/${userPk}`).then((response) => response.data);
+};
+
+export interface IUploadTextVariables {
+    title:string;
+    body:string;
+    user:string;
+    tags:string[];
+} //models와 이름이 같아야함
+
+export const uploadText = (variables:IUploadTextVariables) => instance.post(`texts/`, variables, {
+    headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+    },
+}).then((response) => response.data);
+
+export interface IPostLikesVariables {
+    like:boolean;
+    user:string;
+    text:string;
+    photo:string;
+}
+
+export const postLikes = (photoPk: number, like: boolean, user: string) => {
+    const variables: IPostLikesVariables = {
+        like,
+        user,
+        text: "",  // 텍스트 관련 정보는 필요 없는 경우 빈 문자열로 설정
+        photo: "", // 포토 관련 정보도 필요 없는 경우 빈 문자열로 설정
+        };
+    
+        return instance.post(`photos/${photoPk}/likes`, variables, {
+        headers: {
+            "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+        })
+        .then((response) => response.data);
+};
+
+export const deleteLike = (photoPk: number) => {
+    return instance.delete(`photos/${photoPk}/likes`, {
+        headers: {
+            "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+    })
+    .then((response) => response.data);
 };
