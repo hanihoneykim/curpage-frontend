@@ -3,12 +3,12 @@ import Cookie from "js-cookie";
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL:"http://127.0.0.1:8000/api/v1/",
+    baseURL: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/api/v1/" : "https://curpage.onrender.com/api/v1/",
     withCredentials:true,
 })
 
 const homeInstance = axios.create({
-    baseURL:"http://127.0.0.1:8000/",
+    baseURL: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/" : "https://curpage.onrender.com/",
     withCredentials:true,
 })
 
