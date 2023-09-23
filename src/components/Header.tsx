@@ -92,29 +92,29 @@ export default function Header(){
                 */}
                 {!userLoading ? (
                     !isLoggedIn ? ( 
-                <>
-                <IconButton onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
-                <Button onClick={onLoginOpen}>Log In</Button>
-                <Button onClick={onSignupOpen} colorScheme={"blue"}>Sign Up</Button>    
-                </>
+                    <>
+                    <IconButton onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
+                    <Button onClick={onLoginOpen}>Log In</Button>
+                    <Button onClick={onSignupOpen} colorScheme={"blue"}>Sign Up</Button>    
+                    </>
                 ) : ( 
-                <Box mr={12}>
-                    <IconButton pt={4} mr={7} onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
-                    <Menu>
-                        <MenuButton>
-                            <Avatar name={user.name} src={user.profile_photo} size={'md'} />
-                        </MenuButton>
-                        <MenuList>
-                            <Link to="/api/v1/photos/uploads">
-                                <MenuItem>사진 업로드</MenuItem>
-                            </Link>
-                            <Link to="/api/v1/texts/uploads">
-                                <MenuItem>글 업로드</MenuItem>
-                            </Link>
-                            <MenuItem onClick={onLogOut}>Log out</MenuItem>
-                        </MenuList>
-                    </Menu>
-                </Box>
+                    <Box mr={12}>
+                        <IconButton pt={4} mr={7} onClick={toggleColorMode} aria-label="Toggle dark mode" variant={"ghost"} icon={<Icon />} />
+                        <Menu>
+                            <MenuButton>
+                                <Avatar name={user.name} src={user.profile_photo} size={'md'} />
+                            </MenuButton>
+                            <MenuList>
+                                <Link to="/api/v1/photos/uploads">
+                                    <MenuItem>사진 업로드</MenuItem>
+                                </Link>
+                                <Link to="/api/v1/texts/uploads">
+                                    <MenuItem>글 업로드</MenuItem>
+                                </Link>
+                                <MenuItem onClick={onLogOut}>Log out</MenuItem>
+                            </MenuList>
+                        </Menu>
+                    </Box>
                 )) : null}
                 
             </HStack>
