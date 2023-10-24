@@ -10,6 +10,7 @@ import {
     Input,
     Textarea,
     VStack,
+    useToast,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import ProtectedPage from "../components/ProtectedPage";
@@ -17,6 +18,8 @@ import useUser from "../lib/useUser";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
+import { useMutation } from "@tanstack/react-query";
+import { createPhoto, getUploadURL, uploadImage } from "../api";
 
 interface IForm {
     title:string;
@@ -25,11 +28,48 @@ interface IForm {
     user:string;
     tags:string[];
 } //models의 이름과 같아야함
+interface IUploadURLResponse {
+    id: string;
+    uploadURL: string;
+}
 
 export default function UploadPhoto() {
-    const { register, watch } = useForm<IForm>()
+    const { register, handleSubmit, watch, reset } = useForm<IForm>();
+    const toast = useToast();
+    const createPhotoMutation = useMutation(createPhoto, {
+    onSuccess: () => {
+        toast({
+        status: "success",
+        title: "Image uploaded!",
+        isClosable: true,
+        description: "Feel free to upload more images.",
+        });
+        reset();
+    },
+    });
+    const uploadImageMutation = useMutation(uploadImage, {
+        onSuccess: ({ result }: any) => {
+            createPhotoMutation.mutate({
+                description: "hi hi",
+                photo: `https://imagedelivery.net/aSbksvJjax-AUC7qVnaC4A/${result.id}/public`,
+                title:"hi",
+
+            });
+        }
+    })
+    const uploadURLMutation = useMutation(getUploadURL, {
+        onSuccess: (data: any) => {
+            uploadImageMutation.mutate({
+                uploadURL: data.uploadURL,
+                photo: watch("photo"),
+            });
+        },
+    });
     const { user, isLoggedIn, userLoading } = useUser();
     const navigate = useNavigate();
+    const onSubmit = (data:any) => {
+        uploadURLMutation.mutate()
+    }
     useEffect(() => {
         if (!userLoading) {
             if(!isLoggedIn){
@@ -38,13 +78,12 @@ export default function UploadPhoto() {
         }
     }, [isLoggedIn, userLoading, navigate])
 
-    console.log(watch)
     return (
         <ProtectedPage>
             <Box pb={40} mt={10} px={{ base: 10, lg: 40, }}>
                 <Container>
                 <Heading textAlign={"center"}>사진 업로드</Heading>
-                <VStack spacing={5} as="form" mt={5}>
+                <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing={5} mt={5}>
                     <FormControl>
                     <FormLabel>사진 URL</FormLabel>
                             <Input {...register("photo")} type="file" accept="image/*" />
@@ -62,7 +101,11 @@ export default function UploadPhoto() {
                         <Input {...register("tags")} required type="text" />
                         <FormHelperText>쉼표 ( , ) 로 구분해주세요.</FormHelperText>
                     </FormControl>
-                    <Button w="full" colorScheme={"gray"}>
+                    <Button isLoading={
+                createPhotoMutation.isLoading ||
+                uploadImageMutation.isLoading ||
+                uploadURLMutation.isLoading
+                }type="submit" w="full" colorScheme={"gray"}>
                         Upload photos
                     </Button>
                 </VStack>

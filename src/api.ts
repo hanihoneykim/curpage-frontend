@@ -1,6 +1,7 @@
 import { QueryFunctionContext } from "@tanstack/react-query";
 import Cookie from "js-cookie";
 import axios from "axios";
+import { ITag, IUserBy } from "./types";
 
 const instance = axios.create({
     baseURL: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/api/v1/" : "https://backend.curpage.xyz/api/v1/",
@@ -139,3 +140,50 @@ export const deleteLike = (photoPk: number) => {
     })
     .then((response) => response.data);
 };
+
+export const getUploadURL = () => instance.post(`photos/get-url`, null   , {
+    headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+    },
+}).then((response) => response.data);
+
+export interface IUploadImageVarialbes {
+    photo: FileList;
+    uploadURL: string;
+}
+
+export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
+const form = new FormData();
+form.append("photo", photo[0]);
+return axios
+    .post(uploadURL, form, {
+    headers: {
+        "Content-Type": "multipart/form-data",
+    },
+    })
+    .then((response) => response.data);
+};
+
+export interface ICreatePhotoVariables {
+    description: string;
+    photo: string;
+    title: string;
+}
+
+export const createPhoto = ({
+description,
+photo,
+title,
+
+}: ICreatePhotoVariables) =>
+instance
+    .post(
+    `/photos`,
+    { description, photo, title },
+    {
+        headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+    }
+    )
+    .then((response) => response.data);
