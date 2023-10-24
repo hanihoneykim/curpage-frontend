@@ -83,7 +83,7 @@ export default function UploadPhoto() {
                     </FormControl>
                     <FormControl>
                         <FormLabel>태그</FormLabel>
-                        <Input {...register("tags")} required type="text" />
+                        <Input {...register("tags")} type="text" />
                         <FormHelperText>쉼표 ( , ) 로 구분해주세요.</FormHelperText>
                     </FormControl>
                     <Button type="submit" w="full" colorScheme={"gray"}>
