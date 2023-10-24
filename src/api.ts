@@ -141,49 +141,28 @@ export const deleteLike = (photoPk: number) => {
     .then((response) => response.data);
 };
 
-export const getUploadURL = () => instance.post(`photos/get-url`, null   , {
-    headers: {
-        "X-CSRFToken": Cookie.get("csrftoken") || "",
-    },
-}).then((response) => response.data);
-
-export interface IUploadImageVarialbes {
-    photo: FileList;
-    uploadURL: string;
+export interface IPostPhotoVariables {
+    title:string;
+    photo:File;
+    description:string;
+    tags:string[];
 }
 
-export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
-const form = new FormData();
-form.append("photo", photo[0]);
-return axios
-    .post(uploadURL, form, {
-    headers: {
-        "Content-Type": "multipart/form-data",
-    },
-    })
-    .then((response) => response.data);
-};
+export const uploadPhoto = (variables:IPostPhotoVariables) => {
+    const formData = new FormData();
+    formData.append("title", variables.title);
+    formData.append("photo", variables.photo);
+    formData.append("description", variables.description);
+    variables.tags.forEach((tag, index) => {
+        formData.append(`tags[${index}]`, tag);
+    });
 
-export interface ICreatePhotoVariables {
-    description: string;
-    photo: string;
-    title: string;
-}
-
-export const createPhoto = ({
-description,
-photo,
-title,
-
-}: ICreatePhotoVariables) =>
-instance
-    .post(
-    `/photos`,
-    { description, photo, title },
-    {
-        headers: {
-        "X-CSRFToken": Cookie.get("csrftoken") || "",
-        },
-    }
-    )
-    .then((response) => response.data);
+    return instance
+        .post("photos/uploads", formData, {
+            headers: {
+            "X-CSRFToken": Cookie.get("csrftoken") || "",
+            "Content-Type": "multipart/form-data",
+            },
+        })
+        .then((response) => response.data);
+    };

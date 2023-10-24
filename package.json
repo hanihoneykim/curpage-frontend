@@ -17,6 +17,7 @@
     "@types/node": "^16.18.32",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
+    "aws-sdk": "^2.1480.0",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.14",
     "js-cookie": "^3.0.5",
