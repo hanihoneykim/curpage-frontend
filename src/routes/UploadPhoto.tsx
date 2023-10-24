@@ -63,6 +63,7 @@ export default function UploadPhoto() {
             }
         }
     }, [isLoggedIn, userLoading, navigate])
+
     return (
         <ProtectedPage>
             <Box pb={40} mt={10} px={{ base: 10, lg: 40, }}>

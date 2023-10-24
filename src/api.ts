@@ -154,6 +154,7 @@ export const uploadPhoto = (variables:IPostPhotoVariables) => {
     formData.append("photo", variables.photo);
     formData.append("description", variables.description);
     formData.append("tags", variables.tags)
+    console.log(formData)
 
     return instance
         .post("photos/uploads", formData, {
