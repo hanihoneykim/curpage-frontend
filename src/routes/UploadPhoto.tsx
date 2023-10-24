@@ -23,10 +23,10 @@ import { uploadPhoto } from "../api";
 
 interface IForm {
     title:string;
-    photo:FileList;
+    photo:File;
     description:string;
     user:string;
-    tags:string[];
+    tags:string;
 } //models의 이름과 같아야함
 export default function UploadPhoto() {
     const { register, handleSubmit } = useForm<IForm>()
