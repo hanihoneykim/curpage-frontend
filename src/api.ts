@@ -145,7 +145,7 @@ export interface IPostPhotoVariables {
     title:string;
     photo:File;
     description:string;
-    tags:string[];
+    tags:string;
 }
 
 export const uploadPhoto = (variables:IPostPhotoVariables) => {
@@ -153,9 +153,7 @@ export const uploadPhoto = (variables:IPostPhotoVariables) => {
     formData.append("title", variables.title);
     formData.append("photo", variables.photo);
     formData.append("description", variables.description);
-    variables.tags.forEach((tag, index) => {
-        formData.append(`tags[${index}]`, tag);
-    });
+    formData.append("tags", variables.tags)
 
     return instance
         .post("photos/uploads", formData, {
