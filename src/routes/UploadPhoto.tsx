@@ -45,6 +45,7 @@ export default function UploadPhoto() {
         });
         } catch (error) {
         // 이미지 업로드가 실패한 경우 처리
+        console.log(error)
         toast({
             title: "Upload Failed",
             description: "There was an error uploading your photo.",
