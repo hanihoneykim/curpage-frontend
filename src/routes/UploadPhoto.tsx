@@ -1,5 +1,6 @@
 import {
     Box,
+    Button,
     Checkbox,
     Container,
     FormControl,
@@ -46,21 +47,24 @@ export default function UploadPhoto() {
                 <VStack spacing={5} as="form" mt={5}>
                     <FormControl>
                     <FormLabel>사진 URL</FormLabel>
-                    <Input {...register("photo")} type="file" accept="image/*" />
+                            <Input {...register("photo")} type="file" accept="image/*" />
                     </FormControl>
                     <FormControl>
-                    <FormLabel>제목</FormLabel>
-                    <Input {...register("title",{required:true})} required type="text" />
+                        <FormLabel>제목</FormLabel>
+                        <Input {...register("title",{required:true})} required type="text" />
                     </FormControl>
                     <FormControl>
-                    <FormLabel>본문</FormLabel>
-                    <Textarea {...register("description")} />
+                        <FormLabel>본문</FormLabel>
+                        <Textarea {...register("description")} />
                     </FormControl>
                     <FormControl>
-                    <FormLabel>태그</FormLabel>
-                    <Input {...register("tags")} required type="text" />
-                    <FormHelperText>쉼표 ( , ) 로 구분해주세요.</FormHelperText>
+                        <FormLabel>태그</FormLabel>
+                        <Input {...register("tags")} required type="text" />
+                        <FormHelperText>쉼표 ( , ) 로 구분해주세요.</FormHelperText>
                     </FormControl>
+                    <Button w="full" colorScheme={"gray"}>
+                        Upload photos
+                    </Button>
                 </VStack>
                 </Container>
             </Box>
