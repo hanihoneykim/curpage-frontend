@@ -159,7 +159,7 @@ export interface IUploadImageVarialbes {
 
 export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
     const form = new FormData();
-    form.append("photo", photo[0]);
+    form.append("file", photo[0]);
     return axios
         .post(uploadURL, form, {
         headers: {

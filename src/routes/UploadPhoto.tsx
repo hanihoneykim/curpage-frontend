@@ -53,7 +53,7 @@ export default function UploadPhoto() {
 
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
-    const onSubmit =(data:any) => {
+    const onSubmit = () => {
         uploadURLMutation.mutate();
     }
     const navigate = useNavigate();
