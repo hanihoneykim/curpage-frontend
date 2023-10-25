@@ -8,9 +8,6 @@ const instance = axios.create({
     withCredentials:true,
 })
 
-const Imageinstance = axios.create({
-    baseURL: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/api/v1/" : "https://backend.curpage.xyz/api/v1/",
-})
 
 const homeInstance = axios.create({
     baseURL: process.env.NODE_ENV === "development" ? "http://127.0.0.1:8000/" : "https://backend.curpage.xyz/",
@@ -146,7 +143,7 @@ export const deleteLike = (photoPk: number) => {
 };
 
 export const getUploadURL = () => {
-    return Imageinstance
+    return instance
         .post(`photos/get-url`, null, {
             headers: {
             "X-CSRFToken": Cookie.get("csrftoken") || "",
@@ -187,7 +184,7 @@ photo,
 tags,
 
 }: ICreatePhotoVariables) =>
-Imageinstance
+instance
     .post(
     `photos`,
     { description, photo, title, tags },

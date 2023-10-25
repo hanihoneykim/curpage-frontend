@@ -51,7 +51,7 @@ export default function UploadPhoto() {
         onSuccess: ({ result }: any) => {
             createPhotoMutation.mutate({
                 description: "hi",
-                photo: `https://imagedelivery.net/488yOgxQCaF4ztit8OVy7g/${result.id}/public`,
+                photo: result.variants[0],
                 title:"hi",
                 tags:"hi",
             });
