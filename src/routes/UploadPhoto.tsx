@@ -46,7 +46,7 @@ export default function UploadPhoto() {
         onSuccess: (data: IUploadURLResponse) => {
             uploadImageMutation.mutate({
                 uploadURL: data.uploadURL,
-                file: watch("photo"),
+                photo: watch("photo"),
             });
         }
     })
@@ -65,7 +65,6 @@ export default function UploadPhoto() {
         }
     }, [isLoggedIn, userLoading, navigate])
 
-    console.log(watch())
     return (
         <ProtectedPage>
             <Box pb={40} mt={10} px={{ base: 10, lg: 40, }}>
