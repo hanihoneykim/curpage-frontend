@@ -141,6 +141,8 @@ export const deleteLike = (photoPk: number) => {
     .then((response) => response.data);
 };
 
+
+{/*
 export interface IPostPhotoVariables {
     title:string;
     photo:File;
@@ -165,3 +167,4 @@ export const uploadPhoto = (variables:IPostPhotoVariables) => {
         })
         .then((response) => response.data);
     };
+*/}

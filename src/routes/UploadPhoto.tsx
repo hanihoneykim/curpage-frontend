@@ -19,7 +19,6 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
-import { uploadPhoto } from "../api";
 
 interface IForm {
     title:string;
@@ -32,29 +31,9 @@ export default function UploadPhoto() {
     const { register, handleSubmit } = useForm<IForm>()
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
-    const onSubmit = async (data:any) => {
-        try {
-        const response = await uploadPhoto(data);
-        // 이미지 업로드가 성공한 경우 처리
-        toast({
-            title: "Upload Successful",
-            description: "Your photo has been uploaded successfully.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-        });
-        } catch (error) {
-        // 이미지 업로드가 실패한 경우 처리
-        console.log(error)
-        toast({
-            title: "Upload Failed",
-            description: "There was an error uploading your photo.",
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-        });
-        }
-    };
+    const onSubmit =(data:any) => {
+        console.log(data)
+    }
     const navigate = useNavigate();
     useEffect(() => {
         if (!userLoading) {
