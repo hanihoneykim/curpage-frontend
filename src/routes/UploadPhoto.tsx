@@ -45,6 +45,7 @@ export default function UploadPhoto() {
                 uploadURL: data.uploadURL,
                 file: watch("photo"),
             });
+        }
     })
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
