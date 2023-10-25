@@ -169,6 +169,32 @@ export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
         .then((response) => response.data);
     };
 
+export interface ICreatePhotoVariables {
+    description: string;
+    photo: string;
+    title:string;
+    tags:string;
+    }
+    
+export const createPhoto = ({
+description,
+title,
+photo,
+tags,
+
+}: ICreatePhotoVariables) =>
+instance
+    .post(
+    `photos`,
+    { description, photo, title, tags },
+    {
+        headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+    }
+    )
+    .then((response) => response.data);
+
 {/*
 export interface IPostPhotoVariables {
     title:string;

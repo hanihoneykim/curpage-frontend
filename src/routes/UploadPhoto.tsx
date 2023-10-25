@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
-import { getUploadURL, uploadImage} from "../api";
+import { createPhoto, getUploadURL, uploadImage} from "../api";
 
 interface IForm {
     title:string;
@@ -33,12 +33,29 @@ interface IUploadURLResponse {
     uploadURL: string;
 }
 export default function UploadPhoto() {
-    const { register, handleSubmit, watch } = useForm<IForm>()
+    const { register, handleSubmit, watch, reset } = useForm<IForm>()
+    const toast = useToast();
+    const createPhotoMutation = useMutation(createPhoto, {
+        onSuccess: () => {
+        toast({
+            status: "success",
+            title: "Image uploaded!",
+            isClosable: true,
+            description: "Feel free to upload more images.",
+        });
+        reset();
+        },
+    });
     
     const uploadImageMutation = useMutation(uploadImage, {
-        onSuccess: (data: any) => {
-            console.log(data);
-        },
+        onSuccess: ({ result }: any) => {
+            createPhotoMutation.mutate({
+                description: "hi",
+                photo: `https://imagedelivery.net/aSbksvJjax-AUC7qVnaC4A/${result.id}/public`,
+                title:"hi",
+                tags:"hi",
+            });
+        }
     });
 
 
@@ -52,7 +69,6 @@ export default function UploadPhoto() {
     })
 
     const { user, isLoggedIn, userLoading } = useUser();
-    const toast = useToast();
     const onSubmit = () => {
         uploadURLMutation.mutate();
     }
@@ -88,7 +104,11 @@ export default function UploadPhoto() {
                         <Input {...register("tags")} type="text" />
                         <FormHelperText>쉼표 ( , ) 로 구분해주세요.</FormHelperText>
                     </FormControl>
-                    <Button type="submit" w="full" colorScheme={"gray"}>
+                    <Button isLoading={
+                createPhotoMutation.isLoading ||
+                uploadImageMutation.isLoading ||
+                uploadURLMutation.isLoading
+                } type="submit" w="full" colorScheme={"gray"}>
                         Upload photos
                     </Button>
                 </VStack>
