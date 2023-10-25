@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
-import { getUploadURL, uploadImage } from "../api";
+import { getUploadURL} from "../api";
 
 interface IForm {
     title:string;
