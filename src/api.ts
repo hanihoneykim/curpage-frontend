@@ -141,6 +141,16 @@ export const deleteLike = (photoPk: number) => {
     .then((response) => response.data);
 };
 
+export const getUploadURL = () => {
+    return instance
+        .post(`photos/get-url`, null, {
+            headers: {
+            "X-CSRFToken": Cookie.get("csrftoken") || "",
+            },
+        })
+        .then((response) => response.data);
+    };
+
 
 {/*
 export interface IPostPhotoVariables {
