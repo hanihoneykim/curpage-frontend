@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegUser } from "react-icons/fa";
 import { useMutation } from "@tanstack/react-query";
-import { getUploadURL } from "../api";
+import { getUploadURL, uploadImage } from "../api";
 
 interface IForm {
     title:string;
@@ -28,17 +28,28 @@ interface IForm {
     user:string;
     tags:string;
 } //models의 이름과 같아야함
+interface IUploadURLResponse {
+    id: string;
+    uploadURL: string;
+}
 export default function UploadPhoto() {
-    const { register, handleSubmit } = useForm<IForm>()
-    const mutation = useMutation(getUploadURL, {
-        onSuccess:(data:any) => {
-            console.log(data)
-        }
+    const { register, handleSubmit, watch } = useForm<IForm>()
+    const uploadImageMutation = useMutation(uploadImage, {
+        onSuccess: (data: any) => {
+            console.log(data);
+        },
+    });
+    const uploadURLMutation = useMutation(getUploadURL, {
+        onSuccess: (data: IUploadURLResponse) => {
+            uploadImageMutation.mutate({
+                uploadURL: data.uploadURL,
+                file: watch("photo"),
+            });
     })
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
     const onSubmit =(data:any) => {
-        mutation.mutate();
+        uploadURLMutation.mutate();
     }
     const navigate = useNavigate();
     useEffect(() => {
