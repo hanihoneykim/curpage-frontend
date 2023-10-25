@@ -43,12 +43,11 @@ export default function UploadPhoto() {
 */}
 
     const uploadURLMutation = useMutation(getUploadURL, {
-        onSuccess: (data: IUploadURLResponse) => {
-            onSuccess:(data:any) => {
+        onSuccess: (data: any) => {
                 console.log(data)
             }
         }
-    })
+    )
 
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
