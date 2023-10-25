@@ -32,9 +32,13 @@ interface IUploadURLResponse {
     id: string;
     uploadURL: string;
 }
+
+
 export default function UploadPhoto() {
     const { register, handleSubmit, watch, reset } = useForm<IForm>()
     const toast = useToast();
+
+    //cloudflare mutation
     const createPhotoMutation = useMutation(createPhoto, {
         onSuccess: () => {
         toast({
@@ -46,7 +50,6 @@ export default function UploadPhoto() {
         reset();
         },
     });
-    
     const uploadImageMutation = useMutation(uploadImage, {
         onSuccess: ({ result }: any) => {
             createPhotoMutation.mutate({
@@ -57,8 +60,6 @@ export default function UploadPhoto() {
             });
         }
     });
-
-
     const uploadURLMutation = useMutation(getUploadURL, {
         onSuccess: (data: IUploadURLResponse) => {
             uploadImageMutation.mutate({

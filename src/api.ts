@@ -142,6 +142,8 @@ export const deleteLike = (photoPk: number) => {
     .then((response) => response.data);
 };
 
+//cloudflare 관련 api
+
 export const getUploadURL = () => {
     return instance
         .post(`photos/get-url`, null, {
