@@ -50,10 +50,10 @@ export default function UploadPhoto() {
     const uploadImageMutation = useMutation(uploadImage, {
         onSuccess: ({ result }: any) => {
             createPhotoMutation.mutate({
-                description: "hi",
+                description:  watch("description"),
                 photo: `https://imagedelivery.net/488yOgxQCaF4ztit8OVy7g/${result.id}/public`,
-                title:"hi",
-                tags:"hi",
+                title:watch("title"),
+                tags: watch("tags"),
             });
         }
     });
