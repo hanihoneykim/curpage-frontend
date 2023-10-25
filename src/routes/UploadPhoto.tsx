@@ -43,7 +43,7 @@ export default function UploadPhoto() {
         onSuccess: (data: IUploadURLResponse) => {
             uploadImageMutation.mutate({
                 uploadURL: data.uploadURL,
-                file: watch("photo"),
+                photo: watch("photo"),
             });
         }
     })

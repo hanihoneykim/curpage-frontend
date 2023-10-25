@@ -152,13 +152,13 @@ export const getUploadURL = () => {
     };
 
 export interface IUploadImageVarialbes {
-    file: FileList;
+    photo: FileList;
     uploadURL: string;
 }
 
-export const uploadImage = ({ file, uploadURL }: IUploadImageVarialbes) => {
+export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
     const form = new FormData();
-    form.append("photo", file[0]);
+    form.append("photo", photo[0]);
     return axios
         .post(uploadURL, form, {
         headers: {
