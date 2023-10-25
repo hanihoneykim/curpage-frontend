@@ -34,19 +34,22 @@ interface IUploadURLResponse {
 }
 export default function UploadPhoto() {
     const { register, handleSubmit, watch } = useForm<IForm>()
+{/*}    
     const uploadImageMutation = useMutation(uploadImage, {
         onSuccess: (data: any) => {
             console.log(data);
         },
     });
+*/}
+
     const uploadURLMutation = useMutation(getUploadURL, {
         onSuccess: (data: IUploadURLResponse) => {
-            uploadImageMutation.mutate({
-                uploadURL: data.uploadURL,
-                photo: watch("photo"),
-            });
+            onSuccess:(data:any) => {
+                console.log(data)
+            }
         }
     })
+
     const { user, isLoggedIn, userLoading } = useUser();
     const toast = useToast();
     const onSubmit =(data:any) => {

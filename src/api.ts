@@ -151,6 +151,7 @@ export const getUploadURL = () => {
         .then((response) => response.data);
     };
 
+{/*
 export interface IUploadImageVarialbes {
     photo: FileList;
     uploadURL: string;
@@ -167,7 +168,7 @@ export const uploadImage = ({ photo, uploadURL }: IUploadImageVarialbes) => {
         })
         .then((response) => response.data);
     };
-
+*/}
 {/*
 export interface IPostPhotoVariables {
     title:string;
