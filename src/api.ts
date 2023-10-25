@@ -186,7 +186,7 @@ tags,
 }: ICreatePhotoVariables) =>
 instance
     .post(
-    `photos`,
+    `photos/`,
     { description, photo, title, tags },
     {
         headers: {
