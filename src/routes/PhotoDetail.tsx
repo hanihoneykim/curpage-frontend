@@ -76,6 +76,7 @@ export default function PhotoDetail() {
                             <IconButton aria-label="bookmark" variant={"ghost"} icon={<FaBookmark />} />
                             <IconButton aria-label="sharez" variant={"ghost"} icon={<FaShare />} />
                         </HStack>
+
                         <Box pt={8} pl={10}>
                             <Text fontWeight={"bold"} fontSize={18}>Comment</Text>
                         </Box>
