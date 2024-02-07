@@ -3,7 +3,7 @@ import { FaComment, FaGithub } from "react-icons/fa";
 export default function SocialLogin() {
     const kakaoParams = {
         client_id:"5bbe0f55441d7daeaf252ad8a81a2c36",
-        redirect_uri:"http://curpage.xyz/social/kakao",
+        redirect_uri:"https://curpage.xyz/social/kakao",
         response_type:"code",
     }
     const params = new URLSearchParams(kakaoParams).toString();
